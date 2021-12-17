@@ -1,0 +1,236 @@
+{% extends 'adminpanel/admin_base.html' %} 
+{% load static %}
+
+ {% block content %}
+<body class="nk-body bg-lighter npc-default has-sidebar ">
+    <div class="nk-app-root">
+        <!-- main @s -->
+        <div class="nk-main ">
+            <!-- sidebar @s -->
+        {% include 'adminpanel/navigation/sidebar.html' %}
+            <!-- sidebar @e -->
+            <!-- wrap @s -->
+            <div class="nk-wrap ">
+                <!-- main header @s -->
+               {% include 'adminpanel/navigation/header.html' %}
+                <!-- main header @e -->
+                <!-- content @s -->
+                <div class="nk-content ">
+                    <div class="container-fluid">
+                        <div class="nk-content-inner">
+                            <div class="nk-content-body">
+                                <div class="nk-block-head nk-block-head-sm">
+                                    <div class="nk-block-between">
+                                        <div class="nk-block-head-content">
+                                            <h3 class="nk-block-title page-title">Dashboard</h3>
+                                        </div><!-- .nk-block-head-content -->
+                                       
+                                    </div><!-- .nk-block-between -->
+                                </div><!-- .nk-block-head -->
+                                <div class="nk-block">
+                                    <div class="row g-gs">
+                                        <div class="col-xxl-3 col-sm-4">
+                                            <div class="card">
+                                                <div class="nk-ecwg nk-ecwg6">
+                                                    <div class="card-inner">
+                                                        <div class="card-title-group">
+                                                            <div class="card-title">
+                                                                <h6 class="title"> Total Users</h6> 
+                                                            </div>
+                                                        </div>
+                                                        <div class="data">
+                                                            <div class="data-group">
+                                                                <div class="amount">{{get_users.count}}</div>
+                                                                <div class="nk-ecwg6-ck">
+                                                                    <canvas class="ecommerce-line-chart-s3" id="todayOrders"></canvas>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div><!-- .card-inner -->
+                                                </div><!-- .nk-ecwg -->
+                                            </div><!-- .card -->
+                                        </div><!-- .col -->
+                                        <div class="col-xxl-3 col-sm-4">
+                                            <div class="card">
+                                                <div class="nk-ecwg nk-ecwg6">
+                                                    <div class="card-inner">
+                                                        <div class="card-title-group">
+                                                            <div class="card-title">
+                                                                <h6 class="title">Completed Profile</h6>
+                                                            </div>
+                                                        </div>
+                                                        <div class="data">
+                                                            <div class="data-group">
+                                                                <div class="amount">...</div>
+                                                                <div class="nk-ecwg6-ck">
+                                                                    <canvas class="ecommerce-line-chart-s3" id="todayRevenue"></canvas>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div><!-- .card-inner -->
+                                                </div><!-- .nk-ecwg -->
+                                            </div><!-- .card -->
+                                        </div><!-- .col -->
+                                        <div class="col-xxl-3 col-sm-4">
+                                            <div class="card">
+                                                <div class="nk-ecwg nk-ecwg6">
+                                                    <div class="card-inner">
+                                                        <div class="card-title-group">
+                                                            <div class="card-title">
+                                                                <h6 class="title">Paid Card</h6>
+                                                            </div>
+                                                        </div>
+                                                        <div class="data">
+                                                            <div class="data-group">
+                                                                <div class="amount">...</div>
+                                                                <div class="nk-ecwg6-ck">
+                                                                    <canvas class="ecommerce-line-chart-s3" id="todayCustomers"></canvas>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div><!-- .card-inner -->
+                                                </div><!-- .nk-ecwg -->
+                                            </div><!-- .card -->
+                                        </div><!-- .col -->
+
+                                        
+                                       
+
+
+                                        
+                                    </div><!-- .row -->
+                                </div><!-- .nk-block -->
+                            </div>
+                        </div>
+                    </div> 
+                </div>
+
+                <div class="card card-preview  container">
+                <br>
+                <h4>Open Tickets | {{open_tickets.count}}</h4>
+                    <div class="card-inner">
+
+                    <table class="datatable-init nk-tb-list nk-tb-ulist" data-auto-responsive="false">
+                            <thead>
+                                <tr class="nk-tb-item nk-tb-head">
+                                    
+                                    <th class="nk-tb-col"><span class="sub-text">ID</span></th>
+                                    <th class="nk-tb-col tb-col-mb"><span class="sub-text">Username</span></th>
+                                    <th class="nk-tb-col tb-col-mb"><span class="sub-text">completed profile</span></th>
+                                    <th class="nk-tb-col tb-col-mb"><span class="sub-text">Ticket Status</span></th>
+                                    
+                                    <th class="nk-tb-col tb-col-md"><span class="sub-text">Actions</span></th>
+                                    
+                                </tr>
+                            </thead>
+                            <tbody>
+                            {% for ticket in open_tickets %}
+                            
+                                <tr class="nk-tb-item">
+
+                                    <td class="nk-tb-col">
+                                        {{forloop.counter}}
+                                    </td>
+                                    <td class="nk-tb-col tb-col-mb" data-order="35040.34">
+                                        {{ticket.user.username}}
+                                    </td>
+
+                                      <td class="nk-tb-col tb-col-mb" data-order="35040.34">
+                                       {{ticket.user.profile.level_quiz_completed}}
+                                    </td>
+
+                                    <td class="nk-tb-col tb-col-mb" data-order="35040.34">
+                                        {{ticket.ticket_status}}
+                                    </td>
+                                    
+                                    
+                                    <td class="nk-tb-col tb-col-md">
+                                        <a href="{% url 'contact_admin' ticket.id %}" class="btn btn-primary " target="_blank">View Ticket</a>
+                                        <a href="{% url 'close_ticket' ticket.id %}" class="btn btn-warning ">Close Ticket</a>
+                                    </td>
+                                    
+                                </tr><!-- .nk-tb-item  -->
+                               {% empty %}
+                               <div class="container">
+                               <center> <h3> No open tickets </h3> </center>
+                               <br>
+                               </div>
+                                {% endfor %}
+                        
+                                
+                                
+                            </tbody>
+                        </table>
+
+                        
+                    </div>
+                    <br>
+                <div class="card card-preview  container">
+                <h4>Closed Tickets </h4>
+                    <div class="card-inner">
+
+                    <table class="datatable-init nk-tb-list nk-tb-ulist" data-auto-responsive="false">
+                            <thead>
+                                <tr class="nk-tb-item nk-tb-head">
+                                    
+                                    <th class="nk-tb-col"><span class="sub-text">ID</span></th>
+                                    <th class="nk-tb-col tb-col-mb"><span class="sub-text">Username</span></th>
+                                     <th class="nk-tb-col tb-col-mb"><span class="sub-text">completed profile</span></th>
+                                    <th class="nk-tb-col tb-col-mb"><span class="sub-text">Ticket Status</span></th>
+                                    
+                                    <th class="nk-tb-col tb-col-md"><span class="sub-text">Actions</span></th>
+                                    
+                                </tr>
+                            </thead>
+                            <tbody>
+                            {% for ticket in closed_tickets %}
+                            {% if ticket.get_ticket_reply.count > 0 %}
+                                <tr class="nk-tb-item">
+
+                                    <td class="nk-tb-col">
+                                        {{forloop.counter}}
+                                    </td>
+                                    <td class="nk-tb-col tb-col-mb" data-order="35040.34">
+                                        {{ticket.user.username}}
+                                    </td>
+
+                                     <td class="nk-tb-col tb-col-mb" data-order="35040.34">
+                                       {{ticket.user.profile.level_quiz_completed}}
+                                    </td>
+
+                                    <td class="nk-tb-col tb-col-mb" data-order="35040.34">
+                                        {{ticket.ticket_status}}
+                                    </td>
+                                    
+                                    
+                                    <td class="nk-tb-col tb-col-md">
+                                        <a href="{% url 'contact_admin' ticket.id %}" class="btn btn-primary" target="_blank">View Ticket</a>
+                                        {% comment %} <a href="{% url 'close_ticket' ticket.id %}" class="btn btn-warning ">Close Ticket</a> {% endcomment %}
+                                    </td>
+                                    
+                                </tr><!-- .nk-tb-item  -->
+                                {% endif %}
+                                
+                                {% endfor %}
+                        
+                                
+                                
+                            </tbody>
+                        </table>
+
+                        
+                    </div>
+
+
+
+                </div><!-- .card-preview -->
+                
+              
+            </div>
+            <!-- wrap @e -->
+        </div>
+        <!-- main @e -->
+    </div>
+    <!-- app-root @e -->
+    
+    {% endblock content %}

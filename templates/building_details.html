@@ -1,0 +1,115 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% load static %}
+
+{% block page_meta %} 
+
+    <title>  Project Details</title>
+    <meta name="description" content="">
+
+{% endblock page_meta %}
+
+{% block content %}
+
+{% include 'navbar.html' %}
+
+   <!-- component -->
+    <div class="bg-slate-100 h-screen">
+      <nav class="w-full bg-yellow-400 py-4">
+        <h1 class="text-center text-2xl font-bold">Building: {{get_building.bulding_name}}</h1>
+      </nav>
+      <div class="flex flex-col w-full pt-28 items-center justify-center">
+        <div>
+          <form  action="{% url 'building_details' get_building.id %}" method="post" class="bg-white rounded-md py-10 px-12 shadow-lg">
+            {% csrf_token %}
+            <h1 class="text-xl mt-2 text-center font-semibold text-gray-600">Create An Appartment</h1>
+            <div class="mt-6 flex space-x-4 m-10 justify-center">
+              <input placeholder="number_of_rooms" name="number_of_rooms" type="text" class="bg-gray-100 rounded-md py-2 px-4 border-2 outline-none"/>
+              <input placeholder="floor_number" name="floor_number" type="text" class="bg-gray-100 rounded-md py-2 px-4 border-2 outline-none"/>
+              <button class="bg-yellow-400 px-4 rounded-md font-semibold">create appartment</button>
+            </div>
+            </p>
+        </form>
+
+       
+        </div>
+        </section>
+
+        <br><br>
+
+        <center> <h1 class="text-gray-900 font-semibold mt-10 ">List Of appartments for building: {{get_building.bulding_name}}</h1> </center>
+
+        <br>
+
+        <!-- component -->
+<div>
+    <table class="min-w-full table-auto">
+      <thead class="justify-between">
+        <tr class="bg-gray-800">
+          <th class="px-16 py-2">
+            <span class="text-gray-300"></span>
+          </th>
+          <th class="px-16 py-2">
+            <span class="text-gray-300">Building Name</span>
+          </th>
+          <th class="px-16 py-2">
+            <span class="text-gray-300">Appartment no</span>
+          </th>
+          <th class="px-16 py-2">
+            <span class="text-gray-300">Number of Bedroom</span>
+          </th>
+
+          <th class="px-16 py-2">
+            <span class="text-gray-300">Floor number</span>
+          </th>
+
+          <th class="px-16 py-2">
+            <span class="text-gray-300">Actions</span>
+          </th>
+        </tr>
+      </thead>
+      <tbody class="bg-gray-200">
+        
+        {% for item in get_appartments %}
+        <tr class="bg-white border-4 border-gray-200">
+          <td class="px-16 py-2 flex flex-row items-center">
+            <img
+              class="h-8 w-8 rounded-full object-cover "
+              src="https://randomuser.me/api/portraits/men/30.jpg"
+              alt=""
+            />
+          </td>
+          <td>
+            <span class="text-center ml-2 font-semibold">{{item.building.bulding_name}}</span>
+          </td>
+          <td class="px-16 py-2">
+                <span></span>
+            
+          </td>
+          <td class="px-16 py-2">
+            <span>{{item.number_of_rooms}}</span>
+          </td>
+          <td class="px-16 py-2">
+            <span><span>{{item.floor_number}}</span></span>
+          </td>
+
+          <td class="px-16 py-2">
+            <a href="" class="bg-indigo-500 text-white px-4 py-2 border rounded-md hover:bg-white hover:border-indigo-500 hover:text-black ">
+                View Appartments Details
+            </a>
+          </td>
+        </tr>
+        {% empty %}
+        <center> <h1 class="text-gray-900 font-semibold mt-10 ">No appartments Available </h1> </center>
+
+        {% endfor %}
+       
+        
+      </tbody>
+    </table>
+  </div>
+
+      </div>
+    </div>
+
+{% endblock content%}

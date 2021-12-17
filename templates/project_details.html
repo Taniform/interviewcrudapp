@@ -1,0 +1,115 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% load static %}
+
+{% block page_meta %} 
+
+    <title>  Project Details</title>
+    <meta name="description" content="">
+
+{% endblock page_meta %}
+
+{% block content %}
+
+{% include 'navbar.html' %}
+
+   <!-- component -->
+    <div class="bg-slate-100 h-screen">
+      <nav class="w-full bg-yellow-400 py-4">
+        <h1 class="text-center text-2xl font-bold">Project: {{get_project.project_name}}</h1>
+      </nav>
+      <div class="flex flex-col w-full pt-28 items-center justify-center">
+        <div>
+          <form  action="{% url 'project_details' get_project.id %}" method="post" class="bg-white rounded-md py-10 px-12 shadow-lg">
+            {% csrf_token %}
+            <h1 class="text-xl mt-2 text-center font-semibold text-gray-600">Create A Building</h1>
+            <div class="mt-6 flex space-x-4 m-10 justify-center">
+              <input placeholder="building Name" name="bulding_name" type="text" class="bg-gray-100 rounded-md py-2 px-4 border-2 outline-none"/>
+              <input placeholder="building Type" name="bulding_type" type="text" class="bg-gray-100 rounded-md py-2 px-4 border-2 outline-none"/>
+              <button class="bg-yellow-400 px-4 rounded-md font-semibold">create Building</button>
+            </div>
+            </p>
+        </form>
+
+       
+        </div>
+        </section>
+
+        <br><br>
+
+        <center> <h1 class="text-gray-900 font-semibold mt-10 ">List Of building for project: {{get_project.project_name}}</h1> </center>
+
+        <br>
+
+        <!-- component -->
+<div>
+    <table class="min-w-full table-auto">
+      <thead class="justify-between">
+        <tr class="bg-gray-800">
+          <th class="px-16 py-2">
+            <span class="text-gray-300"></span>
+          </th>
+          <th class="px-16 py-2">
+            <span class="text-gray-300">Project</span>
+          </th>
+          <th class="px-16 py-2">
+            <span class="text-gray-300">Building Name</span>
+          </th>
+          <th class="px-16 py-2">
+            <span class="text-gray-300">Building Type</span>
+          </th>
+
+          <th class="px-16 py-2">
+            <span class="text-gray-300">Total Appartments</span>
+          </th>
+
+          <th class="px-16 py-2">
+            <span class="text-gray-300">Actions</span>
+          </th>
+        </tr>
+      </thead>
+      <tbody class="bg-gray-200">
+        
+        {% for item in get_buildings %}
+        <tr class="bg-white border-4 border-gray-200">
+          <td class="px-16 py-2 flex flex-row items-center">
+            <img
+              class="h-8 w-8 rounded-full object-cover "
+              src="https://randomuser.me/api/portraits/men/30.jpg"
+              alt=""
+            />
+          </td>
+          <td>
+            <span class="text-center ml-2 font-semibold">{{item.project.project_name}}</span>
+          </td>
+          <td class="px-16 py-2">
+                <span>{{item.bulding_name}}</span>
+            
+          </td>
+          <td class="px-16 py-2">
+            <span>{{item.bulding_type}}</span>
+          </td>
+          <td class="px-16 py-2">
+            <span>111111</span>
+          </td>
+
+          <td class="px-16 py-2">
+            <a href="{% url 'building_details' item.id %}" class="bg-indigo-500 text-white px-4 py-2 border rounded-md hover:bg-white hover:border-indigo-500 hover:text-black ">
+                View Appartments
+            </a>
+          </td>
+        </tr>
+        {% empty %}
+        <center> <h1 class="text-gray-900 font-semibold mt-10 ">No Buildings Available </h1> </center>
+
+        {% endfor %}
+       
+        
+      </tbody>
+    </table>
+  </div>
+
+      </div>
+    </div>
+
+{% endblock content%}

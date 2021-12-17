@@ -1,0 +1,155 @@
+v kclkdlasjdk jaksdja{% extends 'adminpanel/admin_base.html' %} 
+{% load static %}
+
+ {% block content %}
+<body class="nk-body bg-lighter npc-default has-sidebar ">
+    <div class="nk-app-root">
+        <!-- main @s -->
+        <div class="nk-main ">
+            <!-- sidebar @s -->
+        {% include 'adminpanel/navigation/sidebar.html' %}
+            <!-- sidebar @e -->
+            <!-- wrap @s -->
+            <div class="nk-wrap ">
+                <!-- main header @s -->
+               {% include 'adminpanel/navigation/header.html' %}
+                <!-- main header @e -->
+                <!-- content @s -->
+                <div class="nk-content ">
+                    <div class="container-fluid">
+                        <div class="nk-content-inner">
+                            <div class="nk-content-body">
+                                <div class="nk-block-head nk-block-head-sm">
+                                    <div class="nk-block-between">
+                                        <div class="nk-block-head-content">
+                                            <h4 class="nk-block-title page-title">User Names: {{get_user.profile.first_name}}, {{get_user.profile.last_name}}</h4>
+                                            <h4 class="nk-block-title page-title">User Email:  {{get_user.email}}</h4>
+                                            <h4 class="nk-block-title page-title">User country:  {{get_user.profile.user_country}}</h4>
+                                            <h4 class="nk-block-title page-title">User gender:  {{get_user.profile.gender}}</h4>
+                                            <h4 class="nk-block-title page-title">User Profile Complete:  {{get_user.profile.is_complete}}</h4>
+                                            <h4 class="nk-block-title page-title">User ocupation:  {{get_user.profile.user_occupation}}</h4>
+                                            <h4 class="nk-block-title page-title">User age:  {{get_user.profile.user_age}}</h4>
+                                            
+                                            <hr>
+                                        </div><!-- .nk-block-head-content -->
+                                        
+                                    </div><!-- .nk-block-between -->
+                                </div><!-- .nk-block-head -->
+                                <div class="nk-block">
+                                    <div class="row g-gs">
+                                       
+                                        <div class="col-xxl-12"> 
+                                            <div class="card card-full">
+                                                <div class="card-inner">
+                                                    <div class="card-title-group">
+                                                        <div class="card-title">
+                                                            <h6 class="title">User Levels </h6>
+                                                           
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="nk-tb-list mt-n2">
+
+
+                                                    <div class="card card-preview">
+                                                        <div class="card-inner">
+
+                                                        <table class="datatable-init nk-tb-list nk-tb-ulist" data-auto-responsive="false">
+                                                                <thead>
+                                                                    <tr class="nk-tb-item nk-tb-head">
+                                                                        
+                                                                        <th class="nk-tb-col"><span class="sub-text">ID</span></th>
+                                                                        <th class="nk-tb-col tb-col-mb"><span class="sub-text">Level</span></th>
+
+                                                                         <th class="nk-tb-col tb-col-mb"><span class="sub-text">Completed</span></th>
+                                                                        
+                                                                        <th class="nk-tb-col tb-col-md"><span class="sub-text">Actions</span></th>
+                                                                    
+                                                                    </tr> 
+                                                                </thead>
+                                                                <tbody>
+                                                               
+                                                                    <tr class="nk-tb-item">
+                                                                        <td class="nk-tb-col">1</td>
+                                                                        <td class="nk-tb-col tb-col-mb" data-order="35040.34"> Confirmed information</td>
+                                                                        <td class="nk-tb-col tb-col-mb" data-order="35040.34">{{get_user.profile.has_confirmed_information}}</td>
+                                                                        <td class="nk-tb-col tb-col-md"> <a href="" class="btn btn-primary ">.</a></td>
+                                                                    </tr><!-- .nk-tb-item  --> 
+
+                                                                    <tr class="nk-tb-item">
+                                                                        <td class="nk-tb-col">1</td>
+                                                                        <td class="nk-tb-col tb-col-mb" data-order="35040.34"> Signed Agreement</td>
+                                                                        <td class="nk-tb-col tb-col-mb" data-order="35040.34">{{get_user.profile.has_confirmed_terms}}</td>
+                                                                        <td class="nk-tb-col tb-col-md"> <a href="" class="btn btn-primary ">.</a></td>
+                                                                    </tr><!-- .nk-tb-item  --> 
+
+                                                                     <tr class="nk-tb-item">
+                                                                        <td class="nk-tb-col">2</td>
+                                                                        <td class="nk-tb-col tb-col-mb" data-order="35040.34">Activate Colateral</td>
+                                                                        <td class="nk-tb-col tb-col-mb" data-order="35040.34">{{get_user.profile.has_deposited_colateral}}</td>
+                                                                        {% if get_user.profile.has_deposited_colateral %}
+                                                                        <td class="nk-tb-col tb-col-md"> <a href="" class="btn btn-primary ">active!!</a></td>
+                                                                        {% else %}
+                                                                        <td class="nk-tb-col tb-col-md"> <a href="{% url 'activate_user_colateral' get_user.id %}" class="btn btn-primary ">Activate Colateral</a></td>
+                                                                        {% endif %}
+                                                                    </tr><!-- .nk-tb-item  --> 
+
+                                                                     <tr class="nk-tb-item">
+                                                                        <td class="nk-tb-col">4</td>
+                                                                        <td class="nk-tb-col tb-col-mb" data-order="35040.34">Loan Approved</td>
+                                                                        <td class="nk-tb-col tb-col-mb" data-order="35040.34">{{get_user.profile.loan_approved}}</td>
+                                                                        <td class="nk-tb-col tb-col-md"> <a href="" class="btn btn-primary ">.</a></td>
+                                                                    </tr><!-- .nk-tb-item  --> 
+
+                                                                    <tr class="nk-tb-item">
+                                                                        <td class="nk-tb-col">5</td>
+                                                                        <td class="nk-tb-col tb-col-mb" data-order="35040.34"> Bank Account created</td>
+                                                                        <td class="nk-tb-col tb-col-mb" data-order="35040.34">{{get_user.profile.bank_account_created}}</td>
+                                                                        <td class="nk-tb-col tb-col-md"> <a href="" class="btn btn-primary ">.</a></td>
+                                                                    </tr><!-- .nk-tb-item  --> 
+
+                                                                
+                                                                </tbody>
+                                                            </table>
+
+                                                        
+                                                        </div>
+                                                    </div><!-- .card-preview -->
+
+                                                </div>
+                                            </div><!-- .card -->
+                                        </div>
+
+                                        
+                                    </div><!-- .row -->
+                                </div><!-- .nk-block -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- content @e -->
+                <!-- footer @s 
+                <div class="nk-footer">
+                    <div class="container-fluid">
+                        <div class="nk-footer-wrap">
+                            <div class="nk-footer-copyright"> &copy; 2020 DashLite. Template by <a href="https://softnio.com" target="_blank">Softnio</a>
+                            </div>
+                            <div class="nk-footer-links">
+                                <ul class="nav nav-sm">
+                                    <li class="nav-item"><a class="nav-link" href="#">Terms</a></li>
+                                    <li class="nav-item"><a class="nav-link" href="#">Privacy</a></li>
+                                    <li class="nav-item"><a class="nav-link" href="#">Help</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                footer @e -->
+            </div>
+            <!-- wrap @e -->
+        </div>
+        <!-- main @e -->
+    </div>
+    <!-- app-root @e -->
+    
+    {% endblock content %}
